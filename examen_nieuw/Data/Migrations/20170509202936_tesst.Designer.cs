@@ -8,9 +8,10 @@ using Examen_nieuw.Data;
 namespace Examen_nieuw.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170509202936_tesst")]
+    partial class tesst
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -113,7 +114,7 @@ namespace Examen_nieuw.Data.Migrations
 
                     b.Property<int>("MinVoorraad");
 
-                    b.Property<int>("ProductID");
+                    b.Property<int?>("ProductID");
 
                     b.Property<int>("aantal");
 
@@ -242,8 +243,7 @@ namespace Examen_nieuw.Data.Migrations
                 {
                     b.HasOne("Examen_ToolsForEver.Models.Product")
                         .WithMany("ProductLocations")
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProductID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

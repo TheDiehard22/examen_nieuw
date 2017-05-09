@@ -16,8 +16,28 @@ namespace Examen_nieuw.Controllers
 
         public ProductsController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
+
+        #region Custom
+
+        private void PopulateProductsDropDownList(object SelectedLocation = null)
+        {
+            //var LocationQuery = from d in _context.Products
+            //                    join p in _context.ProductLocations on d.ID equals p.ProductID
+            //                       join l in _context.Locations on p.LocationID equals l.ID
+            //                       select d;
+            //var locationQuery2 = _context.Products
+            //    .Include(p => p.ProductLocations)
+            //        .ThenInclude(l => l.Locations);
+
+            var locationQuery3 = from l in _context.Locations
+                                 orderby l.LocationName
+                                 select l;
+            ViewBag.LocationID = new SelectList(locationQuery3.AsNoTracking(), "ID", "LocationName", SelectedLocation);
+        }
+
+        #endregion
 
         // GET: Products
         public async Task<IActionResult> Index()
@@ -46,6 +66,7 @@ namespace Examen_nieuw.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
+            PopulateProductsDropDownList();
             return View();
         }
 
@@ -58,10 +79,12 @@ namespace Examen_nieuw.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
+                _context.Products.Add(product);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
             return View(product);
         }
 

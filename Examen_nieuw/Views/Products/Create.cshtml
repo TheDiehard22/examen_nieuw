@@ -47,9 +47,11 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="ProductLocationID" class="col-md-2 control-label"></label>
+            <label asp-for="ProductLocations" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="ProductLocationID" class="form-control" />
+                <select asp-for="ProductLocationID" asp-items="@ViewBag.LocationID" class="form-control">
+                    <option value="value">Selecteer optie</option>
+                </select>
                 <span asp-validation-for="ProductLocationID" class="text-danger"></span>
             </div>
         </div>
