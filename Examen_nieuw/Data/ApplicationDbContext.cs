@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Examen_nieuw.Models;
+using Examen_ToolsForEver.Models;
 
 namespace Examen_nieuw.Data
 {
@@ -14,6 +15,10 @@ namespace Examen_nieuw.Data
             : base(options)
         {
         }
+
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductLocation> ProductLocations { get; set; }
+        public DbSet<Location> Locations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
